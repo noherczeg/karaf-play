@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="karaf-play-features-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://karaf.apache.org/xmlns/features/v1.4.0">
+
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</repository>
+    <repository>mvn:org.apache.aries.jax.rs/org.apache.aries.jax.rs.features/1.0.6/xml</repository>
+
+    <feature name="karaf-play-contract" version="${project.version}">
+        <bundle>mvn:com.example/karaf-play-contract/${project.version}</bundle>
+    </feature>
+
+<!--    <feature name="karaf-rest-example-client-cxf" version="${project.version}">-->
+<!--        <bundle>mvn:org.apache.karaf.examples/karaf-rest-example-client-cxf/${project.version}</bundle>-->
+<!--    </feature>-->
+
+    <feature name="karaf-play-service" version="${project.version}">
+        <requirement>osgi.service;effective:=active;filter:=(objectClass=org.osgi.service.http.HttpService)</requirement>
+        <feature version="${project.version}">karaf-play-contract</feature>
+        <feature dependency="true">scr</feature>
+        <feature version="${cxf.version}" dependency="true">cxf-jaxrs</feature>
+        <bundle>mvn:com.example/karaf-play-service/${project.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-annotations/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.module/jackson-module-jaxb-annotations/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/${jackson.version}</bundle>
+        <bundle dependency="true">mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/${jackson.version}</bundle>
+    </feature>
+</features>

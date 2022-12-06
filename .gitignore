@@ -1,0 +1,8 @@
+/**/target
+/**/*.log
+/**/dist
+
+.idea
+
+/karaf/**
+/jdk11/**
